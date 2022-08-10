@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fa-heart-o {
+            color: red;
+            cursor: pointer;
+        }
+        
+        .fa-heart {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="shop__sidebar__search">
+                        <form action="#">
+                            <input type="text" name="search" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="shop__product__option__right">
+                        <p>Sort by Price:</p>
+                        <select onchange="location = this.value;">
+                            <option value="http://127.0.0.1:8000/blog/">Filter</option>
+                            <option value="/blog/?search=approved">Approved</option>
+                            <option value="/blog/?search=not_approved">Not Approved</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for i in data %} {% if i.is_approved %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="{{ i.image.url}}">
+                        </div>
+                        <div class="blog__item__text">
+                            <span><img src="{% static 'img/icon/calendar.png' %}" alt=""> {{ i.pub_date  }}
+                                <span id = heart><i class="fa fa-heart-o" aria-hidden="true" ></i> </span>
+                            </span>
+                            <h5>{{i.title}}</h5>
+                            <h5>Author:- {{i.user}}</h5>
+                            <a href="{% url 'details' i.id %}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="blog__item__text">
+                    <span><img src="{% static 'img/icon/calendar.png' %}" alt=""> {{ i.pub_date  }}</span>
+                    <h2>Under approved</h2>
+                    <h5>{{i.title}}</h5>
+                    <h5>Author:- {{i.user}}</h5>
+                    <a>Read More</a>
+                </div>
+                {% endif %} {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+    $(document).ready(function() {
+        $("#heart").click(function() {
+            if ($("#heart").hasClass("liked")) {
+                $("#heart").html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+                $("#heart").removeClass("liked");
+            } else {
+                $("#heart").html('<i class="fa fa-heart" aria-hidden="true"></i>');
+                $("#heart").addClass("liked");
+            }
+        });
+    });
+</script>
+
+</html>
+{% endblock content %}

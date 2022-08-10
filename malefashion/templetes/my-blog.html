@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container mb-5 mt-5 h-50">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %} {% for i in data %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.title}}</td>
+                <td>{{i.pub_date}}</td>
+                <td>{{i.is_approved|yesno:'Approved, Not Approved' }}</td>
+                <td> <a href="{% url 'blog_del' i.id %}"><i class="fa fa-close"></i></a></td>
+                {% endfor %} {% else %}
+                <h2>You dont have any Blog</h2>
+                <h3> cretae
+                    <a href="{% url 'blog_create'}"></a>Blogs</a>
+                </h3>
+                {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

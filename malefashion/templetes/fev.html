@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% load static %} {% block content %} {% if messages %} {% for msg in messages %}
+<p style="color: red;">{{ msg }}</p>
+{% endfor %} {% endif %}
+<section class="blog spad">
+    <div class="container">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="blog__item">
+                {% for i in data %}
+                <a href="{% url 'remove_fav' i.id %}"><i class="fa fa-close "></i></a>
+                <div class="blog__item__pic set-bg" data-setbg="{{ i.blog.image.url}}">
+                </div>
+                <div class="blog__item__text">
+                    <span><img src="{% static 'img/icon/calendar.png' %}" alt=""> {{ i.blog.pub_date  }}
+                                <i class="fa fa-heart" id="heart" style="color: red; font-size: 20px;"></i>
+                            </span>
+                    <h5>{{i.blog.title}}</h5>
+                    <h5>Author:- {{i.blog.user}}</h5>
+                    <a href="{% url 'details' i.blog.id %}">Read More</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div> {% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in data %}
+                            <tr>
+                                <td class="product__cart__item">
+                                    <div class="product__cart__item__pic">
+                                        <img src="{{ i.product.image.url }}" height="90px" width="90px" alt="">
+                                    </div>
+                                    <div class="product__cart__item__text">
+                                        <h6>{{ i.product.name }}</h6>
+                                        <h5>${{ i.product.price }}</h5>
+                                    </div>
+                                </td>
+                                <td class="quantity__item">
+                                    <div class="quantity">
+
+                                        <h5>{{ i.quantity }}</h5>
+
+                                    </div>
+                                </td>
+
+                                <td class="cart__close"><a href="{% url 'remove_wish' i.id%}"><i class="fa fa-close"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a href="{% url 'index' %}">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn update__btn">
+                            <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->
+
+{% endblock %}
