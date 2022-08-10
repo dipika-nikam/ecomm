@@ -1,10 +1,27 @@
+import email
 from django.db import models
 from auths.models import NewUser
 from  ckeditor.fields import RichTextField
 
 # Create your models here.
+class Blogger_Profile(models.Model):
+    user = models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+    phone_no = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    profile_pic = models.ImageField(upload_to = 'Blogger_Profile')
+    profession = models.CharField(max_length=255)
+    github = models.URLField(max_length=255)
+    twitter = models.URLField(max_length=255)
+    instagram = models.URLField(max_length=255)
+    facebook = models.URLField(max_length=255)
+
+    def __str__(self):
+        return self.name
 class Blogs(models.Model):
     user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    profile =models.ForeignKey(Blogger_Profile,on_delete=models.CASCADE,blank=True,null=True)
     title = models.CharField(max_length=255)
     pub_date = models.DateField(auto_now_add=True)
     image = models.ImageField(upload_to='Blogs')
@@ -52,4 +69,5 @@ class IP(models.Model):
 
     def __str__(self):
         return self.ip
+
 

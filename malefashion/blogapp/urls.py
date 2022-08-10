@@ -12,5 +12,6 @@ urlpatterns = [
    path('fav_blogs',views.favblogs,name='fav_blogs'),
    path('<int:id>/add_fev_blog',views.add_fev_blog,name='add_fev_blog'),
    path('<int:id>/remove_fav',views.remove_fav,name='remove_fav'),
+   path('<int:id>/profile_view',views.profile_view, name='profile_view'),
    # path('<int:id>/detail_view',views.detail_view,name='detail_view'),
 ]

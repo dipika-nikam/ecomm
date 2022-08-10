@@ -9,7 +9,7 @@
                 <div class="blog__hero__text">
                     <h2>{{ blog_list.title }}</h2>
                     <ul>
-                        <li>By <strong>{{ blog_list.user }}</strong></li>
+                        <li>By <strong><a href="{% url 'profile_view' blog_list.id %}">{{ blog_list.user }}</a></strong></li>
                         <li>{{ blog_list.pub_date }}</li>
                         <li>{{ blog_list.count }} <strong>Views</strong></li>
                         <!-- <li>8 Comments</li> -->
@@ -56,10 +56,12 @@
                     <div class="blog__details__share">
                         <span>share</span>
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="youtube"><i class="fa fa-youtube-play"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+
+                            <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/blog/{{ blog_list.id }}/blog_details"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="http://www.twitter.com/share?url=http://127.0.0.1:8000/blog/{{ blog_list.id }}/blog_details" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <!-- <li><a href="#" class="youtube"><i class="fa fa-youtube-play"></i></a></li> -->
+                            <li><a href="https://api.whatsapp.com/send?text={{ blog_list.title }} http://127.0.0.1:8000/blog/{{ blog_list.id }}/blog_details" style="background: #25d366;"><i class="fa fa-whatsapp"></i></a></li>
+                            <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http://127.0.0.1:8000/blog/{{ blog_list.id }}/blog_details&title={{ blog_list.title }}" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
                     </div>
                     <div class="blog__details__text">
@@ -68,17 +70,17 @@
                     <div class="blog__details__quote">
                         <i class="fa fa-quote-left"></i>
                         <p>“When designing an advertisement for a particular product many things should be researched like where it should be displayed.”</p>
-                        <h6>_ John Smith _</h6>
+                        <h6>_ {{ blog_list.user }} _</h6>
                     </div>
                     <div class="blog__details__option">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="blog__details__author">
                                     <div class="blog__details__author__pic">
-                                        <img src="{% static 'img/blog/details/blog-author.jpg' %}" alt="">
+                                        <img src="{% static 'img.profile_pic.url' %}" alt="">
                                     </div>
                                     <div class="blog__details__author__text">
-                                        <h5>Aiden Blair</h5>
+                                        <h5>{{ blog_list.user }}</h5>
                                     </div>
                                 </div>
                             </div>

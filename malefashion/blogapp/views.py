@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Blogs,Postcomments,Fav_blogs,PostImage,IP
+from .models import Blogs,Postcomments,Fav_blogs,PostImage,IP,Blogger_Profile
 from .form import Blogforms
 from auths.models import NewUser
 from django.contrib import messages
@@ -132,7 +132,6 @@ def blog_del(request,id):
 
 def favblogs(request):
     data = Fav_blogs.objects.filter(user=request.user.id)
-
     return render(request, 'fev.html', {'data': data})
 
 def add_fev_blog(request, id):
@@ -148,4 +147,14 @@ def remove_fav(request, id):
     data.delete()
     return redirect('fav_blogs')
 
+def profile_view(request,id):
+    get_blog = Blogs.objects.get(id=id)
+    profile = Blogger_Profile.objects.get(user=get_blog.user)
+    my_blogs = Blogs.objects.filter(profile=profile).order_by('-count')
+    print(profile)
+    context = {
+        'data': profile,
+        'blog': my_blogs,
+    }
+    return render(request, 'profile.html',context)
 
