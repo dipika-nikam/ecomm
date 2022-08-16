@@ -6,10 +6,7 @@ from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.db.models import Q
 
-
-
 # Create your views here.
-
 
 def blogs_index(request):
     if 'search' in request.GET:
@@ -116,7 +113,6 @@ def blog_details(request,id):
         count = IP.objects.filter(blog=data).count()
         data.count = count
         data.save()
-
     commen = Postcomments.objects.filter(blog=data)
     contex={
         'blog_list': data,
